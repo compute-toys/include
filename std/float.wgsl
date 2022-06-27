@@ -16,3 +16,21 @@
 #define FLT_DECIMAL_DIG 9
 #define FLT_MIN_10_EXP (-37)
 #define FLT_MAX_10_EXP 38
+
+// https://git.musl-libc.org/cgit/musl/tree/include/math.h
+
+fn isinf(x: f32) -> bool {
+    return (bitcast<uint>(x) & 0x7fffffff) == 0x7f800000;
+}
+
+fn isnan(x: f32) -> bool {
+    return (bitcast<uint>(x) & 0x7fffffff) > 0x7f800000;
+}
+
+fn isnormal(x: f32) -> bool {
+    return ((bitcast<uint>(x) + 0x00800000) & 0x7fffffff) >= 0x01000000;
+}
+
+fn isfinite(x: f32) -> bool {
+    return (bitcast<uint>(x) & 0x7fffffff) < 0x7f800000;
+}
