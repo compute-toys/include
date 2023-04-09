@@ -38,7 +38,7 @@ fn scan_pass( i: uint, x: SCAN_TYPE ) -> SCAN_TYPE
     for ( var stride = 2u; stride <= SCAN_WORKGROUP_SIZE; stride = stride << 1u ) {
         workgroupBarrier();
 
-        if ( (i & (stride - 1)) == (stride - 1) ) {
+        if ( (i & (stride - 1u)) == (stride - 1u) ) {
             scan_bucket[0][i] += scan_bucket[0][i - stride/2];
         }
     }
