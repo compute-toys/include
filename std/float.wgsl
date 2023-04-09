@@ -20,17 +20,17 @@
 // https://git.musl-libc.org/cgit/musl/tree/include/math.h
 
 fn isinf(x: f32) -> bool {
-    return (bitcast<uint>(x) & 0x7fffffff) == 0x7f800000;
+    return (bitcast<uint>(x) & 0x7fffffffu) == 0x7f800000u;
 }
 
 fn isnan(x: f32) -> bool {
-    return (bitcast<uint>(x) & 0x7fffffff) > 0x7f800000;
+    return (bitcast<uint>(x) & 0x7fffffffu) > 0x7f800000u;
 }
 
 fn isnormal(x: f32) -> bool {
-    return ((bitcast<uint>(x) + 0x00800000) & 0x7fffffff) >= 0x01000000;
+    return ((bitcast<uint>(x) + 0x00800000u) & 0x7fffffffu) >= 0x01000000u;
 }
 
 fn isfinite(x: f32) -> bool {
-    return (bitcast<uint>(x) & 0x7fffffff) < 0x7f800000;
+    return (bitcast<uint>(x) & 0x7fffffffu) < 0x7f800000u;
 }
