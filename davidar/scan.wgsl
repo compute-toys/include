@@ -35,11 +35,11 @@ fn scan_pass( i: uint, x: SCAN_TYPE ) -> SCAN_TYPE
     scan_bucket[1][i] = SCAN_TYPE(0);
 
     // Up sweep
-    for ( var stride = 2u; stride <= SCAN_WORKGROUP_SIZE; stride = stride << 1u ) {
+    for ( var stride = 2u; stride <= uint(SCAN_WORKGROUP_SIZE); stride = stride << 1u ) {
         workgroupBarrier();
 
         if ( (i & (stride - 1u)) == (stride - 1u) ) {
-            scan_bucket[0][i] += scan_bucket[0][i - stride/2];
+            scan_bucket[0][i] += scan_bucket[0][i - stride/2u];
         }
     }
 
